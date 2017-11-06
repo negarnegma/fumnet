@@ -131,7 +131,8 @@ function parseHTML(html) {
         var stPage = parseHTML(response.data);
         // var number = stPage.querySelector(".tabula");
         var number = stPage.getElementsByTagName("div");
-        $scope.matn = number[0].innerHTML;
+        $scope.matn = number[0].innerHTML;//شماه دانشجویی
+        //برای امتخان مرج تغییر داده شد
       },function(response){console.log("cant get status page:" + response.status)}
       );
       $scope.currentStatus = "با این شماره هستی:"
