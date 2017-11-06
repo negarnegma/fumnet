@@ -81,7 +81,7 @@ function parseHTML(html) {
       if (joz == undefined) {
          $scope.matn="امانت شما آزاد است.";if (!$scope.$$phase) $scope.$apply();//حالت های مختلف رو اضافه کن..وارد نشدن و...
          return;
-       }
+       }$scope.matn="2"+response.status;if (!$scope.$$phase) $scope.$apply();
        console.log(joz.unique_id_val.value);
        var negUniqID = parseInt(joz.unique_id_val.value);
        console.log(joz.ras_ip.value);
@@ -92,16 +92,17 @@ function parseHTML(html) {
          unique_id_val:negUniqID
        },
        {},
-       function(response){console.log(response.status);
+       function(response){console.log(response.status);$scope.matn="3"+response.status;if (!$scope.$$phase) $scope.$apply();
          $scope.matn="حله انداختیمش بیرون";if (!$scope.$$phase) $scope.$apply();
        },
        function(response){console.log(response.status);$scope.matn="2"+response.status;if (!$scope.$$phase) $scope.$apply();})   
      },
-     function(response) {console.log(response.status);$scope.matn=response.status;if (!$scope.$$phase) $scope.$apply();}
+     function(response) {console.log(response.status);$scope.matn="1"+response.status;if (!$scope.$$phase) $scope.$apply();}
      );
   },function(response){})
   //end of sakhte ibs_sesssid 
-  //END OF LOG OUT FUNCTION
+ };
+ //END OF LOG OUT FUNCTION
 
   //LOGIN FUNCTION
     $scope.logInNet = function (){
@@ -109,7 +110,6 @@ function parseHTML(html) {
     }
   //END OF LOGIN FUNCTION
    console.log("bade request");
- };
 });
 
 })
