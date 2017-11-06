@@ -60,7 +60,6 @@ function parseHTML(html) {
    $scope.logOut = function (){
      if ($scope.loginData.password == undefined){$scope.matn="رمزتو بده اول خو:|";return;}
      $scope.matn="در حال باربری.-.-\.-/.-\.-/.-\.-/";if (!$scope.$$phase) $scope.$apply();
-     console.log("loadingehttpmoon");
      console.log($scope.loginData.username,$scope.loginData.password);
      window.cordovaHTTP.setHeader("User-Agent", "Mozilla/5.0 (Linux; Android 4.3; C5303 Build/12.1.A.1.205) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.124 Mobile Safari/537.36");
    //sakhte ibs_sesssid:
@@ -108,8 +107,38 @@ function parseHTML(html) {
     $scope.logInNet = function (){
      if ($scope.loginData.password == undefined){$scope.matn="رمزتو بده اول خو:|";return;}
     }
-  //END OF LOGIN FUNCTION
-   console.log("bade request");
+  //END OF LOGIN 
+  //updateStatusFun:
+  $scope.updateStatus = function(){
+    $scope.currentStatus="یه لحظه";if (!$scope.$$phase) $scope.$apply();
+     console.log("Status: "+$scope.loginData.username,$scope.loginData.password);
+     window.cordovaHTTP.setHeader("User-Agent", "Mozilla/5.0 (Linux; Android 4.3; C5303 Build/12.1.A.1.205) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.124 Mobile Safari/537.36");
+     window.cordovaHTTP.setHeader("Cookie","etag=undefined; cache=undefined");
+     window.cordovaHTTP.post("https://hotspot.um.ac.ir/",{},{},function(response){
+      // console.log("status: "+JSON.stringify(response.headers));
+      // // if (response.headers["Location"] == "http://hotspot.um.ac.ir/status")
+      // if (response.data has login word:|)
+      //   {$scope.currentStatus = response.status +"با این شماره هستی:";if (!$scope.$$phase) $scope.$apply();}
+      // $scope.matn = response.data;if (!$scope.$$phase) $scope.$apply();
+      // console.log(response.headers["Location"]);
+      $scope.currentStatus = "متصل نیستی";if (!$scope.$$phase) $scope.$apply();//tajrobi
+      //fix it
+     },function(response){
+      $scope.currentStatus = "نتونستم وضعیت رو چک کنم چون:" + response.status;if (!$scope.$$phase) $scope.$apply();
+      // $scope.matn = response.data;if (!$scope.$$phase) $scope.$apply();
+      // console.log("status: "+JSON.stringify(response.headers));
+      window.cordovaHTTP.get("http://hotspot.um.ac.ir/status",{},{},function(response){
+        var stPage = parseHTML(response.data);
+        // var number = stPage.querySelector(".tabula");
+        var number = stPage.getElementsByTagName("div");
+        $scope.matn = number[0].innerHTML;
+      },function(response){console.log("cant get status page:" + response.status)}
+      );
+      $scope.currentStatus = "با این شماره هستی:"
+
+     });
+  };
+  //end updateStatus
 });
 
 })
