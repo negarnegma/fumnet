@@ -91,12 +91,12 @@ function parseHTML(html) {
          unique_id_val:negUniqID
        },
        {},
-       function(response){console.log(response.status);$scope.matn="3"+response.status;if (!$scope.$$phase) $scope.$apply();
+       function(response){console.log(response.status);$scope.matn="3 "+response.status;if (!$scope.$$phase) $scope.$apply();
          $scope.matn="حله انداختیمش بیرون";if (!$scope.$$phase) $scope.$apply();
        },
-       function(response){console.log(response.status);$scope.matn="2"+response.status;if (!$scope.$$phase) $scope.$apply();})   
+       function(response){console.log(response.status);$scope.matn="2 "+response.status;if (!$scope.$$phase) $scope.$apply();})   
      },
-     function(response) {console.log(response.status);$scope.matn="1"+response.status;if (!$scope.$$phase) $scope.$apply();}
+     function(response) {console.log(response.status);$scope.matn="1  "+response.status;if (!$scope.$$phase) $scope.$apply();}
      );
   },function(response){})
   //end of sakhte ibs_sesssid 
@@ -105,8 +105,18 @@ function parseHTML(html) {
 
   //LOGIN FUNCTION
     $scope.logInNet = function (){
-     if ($scope.loginData.password == undefined){$scope.matn="رمزتو بده اول خو:|";return;}
-    }
+     if ($scope.loginData.password == undefined){$scope.matn="رمزتو بده اول خو:|";if (!$scope.$$phase) $scope.$apply();return;}
+     window.cordovaHTTP.setHeader("User-Agent", "Mozilla/5.0 (Linux; Android 4.3; C5303 Build/12.1.A.1.205) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.124 Mobile Safari/537.36");
+     window.cordovaHTTP.setHeader("Cookie","etag=undefined; cache=undefined");
+     window.cordovaHTTP.post("https://hotspot.um.ac.ir/login",{
+      dst :" ",
+      popup:"true",
+      username:"9512762594",
+      password:"qwwewryt"
+     },{},function(response){
+      $scope.matn="OK!logged in:)";if (!$scope.$$phase) $scope.$apply();
+     },function(response){});
+    };
   //END OF LOGIN 
   //updateStatusFun:
   $scope.updateStatus = function(){
@@ -132,10 +142,9 @@ function parseHTML(html) {
         // var number = stPage.querySelector(".tabula");
         var number = stPage.getElementsByTagName("div");
         $scope.matn = number[0].innerHTML;//شماه دانشجویی
-        //برای امتخان مرج تغییر داده شد
+        $scope.currentStatus = "با این شماره هستی:";
       },function(response){console.log("cant get status page:" + response.status)}
       );
-      $scope.currentStatus = "با این شماره هستی:"
 
      });
   };
