@@ -111,11 +111,13 @@ function parseHTML(html) {
      window.cordovaHTTP.post("https://hotspot.um.ac.ir/login",{
       dst :" ",
       popup:"true",
-      username:"9512762594",
-      password:"qwwewryt"
+      username:$scope.loginData.username,
+      password:$scope.loginData.password
      },{},function(response){
       $scope.matn="OK!logged in:)";if (!$scope.$$phase) $scope.$apply();
-     },function(response){});
+     },function(response){
+      $scope.matn="نشد دوباره امتحان کن چون:";if (!$scope.$$phase) $scope.$apply();//add appropriate (:/) errors
+     });
     };
   //END OF LOGIN 
   //updateStatusFun:
@@ -143,6 +145,7 @@ function parseHTML(html) {
         var number = stPage.getElementsByTagName("div");
         $scope.matn = number[0].innerHTML;//شماه دانشجویی
         $scope.currentStatus = "با این شماره هستی:";
+        if (!$scope.$$phase) $scope.$apply();   //bayad dobar click mishod ta neshoon bede
       },function(response){console.log("cant get status page:" + response.status)}
       );
 
