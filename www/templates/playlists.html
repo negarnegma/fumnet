@@ -1,4 +1,4 @@
-<ion-view >
+<ion-view  >
   <ion-content has-tabs >
   <!-- <div class="tabs tabs-icon-only">
   <a class="tab-item">
@@ -16,12 +16,17 @@
   
 </div> -->
   
-    
-  <img ng-src="img/red.jpg" style="border-radius:50%;" on-tap="logOut();">---
-  <div ng-bind-html='matn'>toTrustedHTML(toTrustedHTML( matn ))</div>---
-  <div on-tap = "updateStatus();">status: {{currentStatus}}</div>---
-  <img ng-src="img/blue.jpg" style="border-radius:50%;" on-tap="logInNet();">
-  <label class="toggle toggle-assertive">
+  <div style="margin: auto;
+    padding-top:20px;
+    width: 50%;
+    text-align: center;">
+    <img ng-src="img/red.jpg" style="border-radius:50%;border: solid 5px gray;" on-tap="logOut();">
+    <div ng-bind-html='matn'>toTrustedHTML(toTrustedHTML( matn ))</div>
+    <div on-tap = "updateStatus();">status: {{currentStatus}}</div>
+    <img ng-src="img/blue.jpg" style="border-radius:50%;border: solid 5px gray;" on-tap="logInNet();">
+    <label class="toggle toggle-assertive">
+  </div>  
+  
    <input type="checkbox">
    <div class="track">
      <div class="handle"></div>

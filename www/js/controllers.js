@@ -56,6 +56,8 @@ function parseHTML(html) {
 
 
   $ionicPlatform.ready(function(){
+    $scope.matn = "سلام!"
+    $scope.currentStatus = "کللیک کن";if (!$scope.$$phase) $scope.$apply();
     //LOGOUT FUNCTOIN:
    $scope.logOut = function (){
      if ($scope.loginData.password == undefined){$scope.matn="رمزتو بده اول خو:|";return;}
